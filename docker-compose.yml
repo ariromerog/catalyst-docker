@@ -3,9 +3,14 @@ services:
     image: postgres
     volumes:
         - "./pgdata:/var/lib/postgresql/data"
+    ports:
+        - ${LOCAL_IP:-127.0.0.1}:${DB_LOCAL_PORT:-5432}:5432
+#        - "5432:5432"
     restart: always
     environment:
-        POSTGRES_PASSWORD: a_secure_passvvord
+       POSTGRES_PASSWORD: db_pass
+       POSTGRES_USER: db_user
+       POSTGRES_DB: db
     networks:
         - catalyst_app_network
 
